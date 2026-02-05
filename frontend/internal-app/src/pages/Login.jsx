@@ -5,7 +5,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submit = async e => {
+  const submit = async (e) => {
     e.preventDefault();
     const res = await api.post("/auth/login", { email, password });
     localStorage.setItem("token", res.data.token);
@@ -15,8 +15,12 @@ export default function Login() {
   return (
     <form onSubmit={submit}>
       <h2>Admin Login</h2>
-      <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-      <input placeholder="Password" type="password" onChange={e => setPassword(e.target.value)} />
+      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+      <input
+        placeholder="Password"
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <button>Login</button>
     </form>
   );

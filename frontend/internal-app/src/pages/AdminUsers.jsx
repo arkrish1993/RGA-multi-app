@@ -9,9 +9,11 @@ export default function AdminUsers() {
     setUsers(res.data);
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
-  const toggle = async id => {
+  const toggle = async (id) => {
     await api.put(`/admin/users/${id}/toggle-status`);
     load();
   };
@@ -19,7 +21,7 @@ export default function AdminUsers() {
   return (
     <div>
       <h2>Users</h2>
-      {users.map(u => (
+      {users.map((u) => (
         <div key={u._id}>
           {u.email} - {u.isActive ? "Active" : "Inactive"}
           <button onClick={() => toggle(u._id)}>Toggle</button>

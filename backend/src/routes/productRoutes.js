@@ -8,11 +8,11 @@ const controller = require("../controllers/productController");
  * CREATE
  */
 router.post(
-    "/",
-    auth,
-    roleGuard(["ADMIN"]),
-    feature("MANAGE_PRODUCTS"),
-    controller.create
+  "/",
+  auth,
+  roleGuard(["ADMIN"]),
+  feature("MANAGE_PRODUCTS"),
+  controller.create,
 );
 
 /**
@@ -29,22 +29,22 @@ router.get("/:id", auth, controller.getById);
  * UPDATE
  */
 router.put(
-    "/:id",
-    auth,
-    roleGuard(["ADMIN"]),
-    feature("MANAGE_PRODUCTS"),
-    controller.update
+  "/:id",
+  auth,
+  roleGuard(["ADMIN"]),
+  feature("MANAGE_PRODUCTS"),
+  controller.update,
 );
 
 /**
  * DELETE
  */
 router.delete(
-    "/:id",
-    auth,
-    roleGuard(["ADMIN"]),
-    feature("MANAGE_PRODUCTS"),
-    controller.remove
+  "/:id",
+  auth,
+  roleGuard(["ADMIN"]),
+  feature("MANAGE_PRODUCTS"),
+  controller.remove,
 );
 
 module.exports = router;

@@ -1,4 +1,3 @@
-
 import api from "../api/api";
 import { useState } from "react";
 
@@ -16,8 +15,12 @@ export default function Login() {
   return (
     <form onSubmit={submit}>
       <h2>Customer Login</h2>
-      <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <button>Login</button>
     </form>
   );

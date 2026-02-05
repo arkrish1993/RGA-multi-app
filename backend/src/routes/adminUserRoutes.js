@@ -15,10 +15,10 @@ router.get("/", auth, roleGuard(["ADMIN"]), controller.getAllUsers);
 router.get("/:id", auth, roleGuard(["ADMIN"]), controller.getUserById);
 
 router.put(
-    "/:id/toggle-status",
-    auth,
-    roleGuard(["ADMIN"]),
-    controller.toggleUserStatus
+  "/:id/toggle-status",
+  auth,
+  roleGuard(["ADMIN"]),
+  controller.toggleUserStatus,
 );
 
 module.exports = router;

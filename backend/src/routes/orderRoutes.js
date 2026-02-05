@@ -6,11 +6,11 @@ const controller = require("../controllers/orderController");
 
 // CUSTOMER creates order
 router.post(
-    "/",
-    auth,
-    roleGuard(["CUSTOMER"]),
-    feature("PLACE_ORDER"),
-    controller.create
+  "/",
+  auth,
+  roleGuard(["CUSTOMER"]),
+  feature("PLACE_ORDER"),
+  controller.create,
 );
 
 // Both can read (scoped in controller)
@@ -19,20 +19,20 @@ router.get("/:id", auth, controller.getById);
 
 // CUSTOMER can update own order
 router.put(
-    "/:id",
-    auth,
-    roleGuard(["CUSTOMER"]),
-    feature("PLACE_ORDER"),
-    controller.update
+  "/:id",
+  auth,
+  roleGuard(["CUSTOMER"]),
+  feature("PLACE_ORDER"),
+  controller.update,
 );
 
 // ADMIN can delete any order
 router.delete(
-    "/:id",
-    auth,
-    roleGuard(["ADMIN"]),
-    feature("VIEW_ALL_ORDERS"),
-    controller.remove
+  "/:id",
+  auth,
+  roleGuard(["ADMIN"]),
+  feature("VIEW_ALL_ORDERS"),
+  controller.remove,
 );
 
 module.exports = router;

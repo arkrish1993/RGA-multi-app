@@ -14,6 +14,12 @@ export default function Navbar() {
         <span className="navbar-brand">Customer Portal</span>
 
         <div className="navbar-nav">
+          <Link to="/products" className="nav-link">
+            Products
+          </Link>
+          <Link to="/orders" className="nav-link">
+            Orders
+          </Link>
           <button className="btn btn-sm btn-outline-light" onClick={logout}>
             Logout
           </button>

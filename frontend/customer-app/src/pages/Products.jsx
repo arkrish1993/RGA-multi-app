@@ -4,13 +4,7 @@ import Navbar from "../components/Navbar";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
-  const [form, setForm] = useState({
-    name: "",
-    price: 0,
-    stock: 0,
-  });
-
-  const [editingId, setEditingId] = useState(null);
+  const [cart, setCart] = useState([]);
 
   const loadProducts = async () => {
     const res = await api.get("/products");
@@ -21,27 +15,29 @@ export default function AdminProducts() {
     loadProducts();
   }, []);
 
-  // const submit = async (e) => {
-  //   e.preventDefault();
+  const addToCart = async (p) => {
+    const temp = [...cart];
+    const findIndex = temp.findIndex((i) => i._id === p._id);
+    if (findIndex !== -1) {
+      temp[findIndex].quantity = temp[findIndex].quantity + 1;
+    } else {
+      temp.push({
+        ...p,
+        quantity: 1,
+      });
+    }
+    setCart(temp);
+  };
 
-  //   if (editingId) {
-  //     await api.put(`/products/${editingId}`, form);
-  //   } else {
-  //     await api.post("/products", form);
-  //   }
+  const removeFromCart = (p) => {
+    const temp = [...cart];
+    const findIndex = temp.findIndex((i) => i._id == p._id);
+    temp.splice(findIndex, 1);
+    setCart(temp);
+  };
 
-  //   setForm({ name: "", price: 0, stock: 0 });
-  //   setEditingId(null);
-  //   loadProducts();
-  // };
-
-  const placeOrder = (p) => {
-    setEditingId(p._id);
-    setForm({
-      name: p.name,
-      price: p.price,
-      stock: p.stock,
-    });
+  const placeOrder = () => {
+    console.log(cart);
   };
 
   return (
@@ -50,7 +46,7 @@ export default function AdminProducts() {
       <div>
         <h3 className="text-center">Product Catalog</h3>
         <div>
-          <table className="table table-bordered table-striped">
+          <table className="table table-bordered table-striped table-hover w-100">
             <thead className="table-dark">
               <tr>
                 <th>Name</th>
@@ -75,9 +71,9 @@ export default function AdminProducts() {
                     <td>
                       <button
                         className="btn btn-primary"
-                        onClick={() => buyProduct(p)}
+                        onClick={() => addToCart(p)}
                       >
-                        Place order
+                        Add To Cart
                       </button>
                     </td>
                   </tr>
@@ -86,6 +82,27 @@ export default function AdminProducts() {
             </tbody>
           </table>
         </div>
+        {cart.length > 0 && (
+          <div>
+            <h4>Cart</h4>
+            <ul className="list-group">
+              {cart.map((p) => (
+                <div className="d-flex" key={p._id}>
+                  <li className="list-group-item w-25">{`${p.name} : ${p.quantity}`}</li>
+                  <button
+                    className="btn btn-danger w-10"
+                    onClick={() => removeFromCart(p)}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </ul>
+            <button className="btn btn-primary" onClick={() => placeOrder()}>
+              Place order
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

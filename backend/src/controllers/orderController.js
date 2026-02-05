@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+// const Product = require("../models/Product");
 
 /**
  * CREATE ORDER
@@ -11,7 +12,12 @@ exports.create = async (req, res) => {
       items: req.body.items,
       totalAmount: req.body.totalAmount,
     });
-
+    // for (const item in order.items) {
+    //   const { _id, quantity } = item;
+    //   const product = await Product.findById(_id);
+    //   product.stock -= quantity;
+    //   await product.save();
+    // }
     res.status(201).json(order);
   } catch (err) {
     res.status(400).json({

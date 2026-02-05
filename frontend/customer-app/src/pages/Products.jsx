@@ -36,23 +36,37 @@ export default function AdminProducts() {
     setCart(temp);
   };
 
-  const placeOrder = () => {
-    console.log(cart);
+  const placeOrder = async () => {
+    const totalAmount = cart.reduce(
+      (accumulator, currentItem) =>
+        accumulator + currentItem.quantity * currentItem.price,
+      0,
+    );
+    try {
+      await api.post(`/orders`, {
+        items: cart,
+        totalAmount,
+      });
+      setCart([]);
+      loadProducts();
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   return (
     <>
       <Navbar />
-      <div>
-        <h3 className="text-center">Product Catalog</h3>
-        <div>
+      <div className="mx-3">
+        <h3 className="text-center my-3">Product Catalog</h3>
+        <div style={{ maxHeight: "50vh" }}>
           <table className="table table-bordered table-striped table-hover w-100">
             <thead className="table-dark">
               <tr>
                 <th>Name</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Actions</th>
+                <th className="text-center">Price</th>
+                <th className="text-center">Stock</th>
+                <th className="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -64,11 +78,11 @@ export default function AdminProducts() {
                 </tr>
               ) : (
                 products.map((p) => (
-                  <tr key={p._id}>
-                    <td>{p.name}</td>
-                    <td>{p.price}</td>
-                    <td>{p.stock}</td>
-                    <td>
+                  <tr className="inline" key={p._id}>
+                    <td className="align-middle">{p.name}</td>
+                    <td className="text-center align-middle">{p.price}</td>
+                    <td className="text-center align-middle">{p.stock}</td>
+                    <td className="text-center align-middle">
                       <button
                         className="btn btn-primary"
                         onClick={() => addToCart(p)}
@@ -98,7 +112,10 @@ export default function AdminProducts() {
                 </div>
               ))}
             </ul>
-            <button className="btn btn-primary" onClick={() => placeOrder()}>
+            <button
+              className="btn btn-primary mt-3"
+              onClick={() => placeOrder()}
+            >
               Place order
             </button>
           </div>

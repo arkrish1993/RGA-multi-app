@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-      <div className="container-fluid">
+      <div className="container-fluid py-3 px-4">
         <span className="navbar-brand">Customer Portal</span>
 
         <div className="navbar-nav">

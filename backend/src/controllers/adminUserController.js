@@ -6,7 +6,7 @@ const User = require("../models/User");
  */
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
+    const users = await User.find({ role: "CUSTOMER" }).select("-password");
     res.json(users);
   } catch (err) {
     res.status(500).json({
@@ -20,7 +20,10 @@ exports.getAllUsers = async (req, res) => {
  */
 exports.getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).select("-password");
+    const user = await User.findById({
+      _id: req.params.id,
+      role: "CUSTOMER",
+    }).select("-password");
 
     if (!user) {
       return res.status(404).json({
@@ -41,7 +44,11 @@ exports.getUserById = async (req, res) => {
  */
 exports.toggleUserStatus = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    // const user = await User.findById(req.params.id);
+    const user = await User.findOne({
+      _id: req.params.id,
+      role: "CUSTOMER",
+    });
 
     if (!user) {
       return res.status(404).json({

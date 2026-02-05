@@ -13,12 +13,12 @@ export default function Login() {
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: "400px" }}>
-      <div className="card p-4 shadow">
-        <div className="card-header">
-          <h2>Customer Login</h2>
+    <div className="container mt-5" style={{ maxWidth: "600px" }}>
+      <div className="card shadow">
+        <div className="card-header bg-primary bg-gradient text-light p-3 text-center">
+          <h2>Sign in</h2>
         </div>
-        <div className="card-body">
+        <div className="card-body mt-3">
           <form onSubmit={submit}>
             <input
               placeholder="Email"
@@ -34,11 +34,16 @@ export default function Login() {
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
             <br />
-            <button type="submit" className="btn btn-primary mb-3">
+            <button
+              type="submit"
+              className="btn btn btn-outline-success w-100 mt-3"
+            >
               Login
             </button>
             <br />
-            New User? <Link to="/register">Sign Up</Link>
+            <div className="mt-5 text-center">
+              New User? <Link to="/register">Sign Up</Link>
+            </div>
           </form>
         </div>
       </div>

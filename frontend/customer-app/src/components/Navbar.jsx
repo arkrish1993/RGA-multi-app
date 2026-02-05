@@ -9,7 +9,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+    <nav className="navbar navbar-dark bg-primary bg-gradient navbar-expand-lg">
       <div className="container-fluid py-3 px-4">
         <span className="navbar-brand">Customer Portal</span>
 

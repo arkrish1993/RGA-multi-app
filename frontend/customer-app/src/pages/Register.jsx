@@ -25,11 +25,11 @@ export default function Register() {
 
   return (
     <div className="container mt-5" style={{ maxWidth: "600px" }}>
-      <div className="card p-4 shadow">
-        <div className="card-header bg-primary text-light">
-          <h2>Register</h2>
+      <div className="card shadow">
+        <div className="card-header bg-primary bg-gradient text-light p-3 text-center">
+          <h2>Sign up</h2>
         </div>
-        <div className="card-body">
+        <div className="card-body mt-3">
           <form onSubmit={submit}>
             <div>
               <input
@@ -56,14 +56,17 @@ export default function Register() {
               />
             </div>
             <div>
-              <button className="btn btn-success" type="submit">
-                Register
+              <button
+                className="btn btn btn-outline-success w-100 mt-3"
+                type="submit"
+              >
+                Sign up
               </button>
             </div>
           </form>
 
-          <p className="mt-3 text-center">
-            Already Registered? <Link to="/login">Login</Link>
+          <p className="mt-5 text-center">
+            Already a user? <Link to="/login">Login</Link>
           </p>
         </div>
       </div>

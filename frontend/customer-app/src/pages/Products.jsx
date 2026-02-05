@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 import Navbar from "../components/Navbar";
 
-export default function AdminProducts() {
+export default function Products() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -47,6 +47,7 @@ export default function AdminProducts() {
         items: cart,
         totalAmount,
       });
+      alert("Order placed successfully.");
       setCart([]);
       loadProducts();
     } catch (err) {
@@ -60,7 +61,7 @@ export default function AdminProducts() {
       <div className="mx-3">
         <h3 className="text-center my-3">Product Catalog</h3>
         <div style={{ maxHeight: "50vh" }}>
-          <table className="table table-bordered table-striped table-hover w-100">
+          <table className="table table-primary table-striped table-hover w-100">
             <thead className="table-dark">
               <tr>
                 <th>Name</th>
@@ -80,7 +81,7 @@ export default function AdminProducts() {
                 products.map((p) => (
                   <tr className="inline" key={p._id}>
                     <td className="align-middle">{p.name}</td>
-                    <td className="text-center align-middle">{p.price}</td>
+                    <td className="text-center align-middle">{`Rs.${p.price}`}</td>
                     <td className="text-center align-middle">{p.stock}</td>
                     <td className="text-center align-middle">
                       <button
@@ -98,18 +99,18 @@ export default function AdminProducts() {
         </div>
         {cart.length > 0 && (
           <div>
-            <h4>Cart</h4>
+            <h4 className="mt-5">Cart</h4>
             <ul className="list-group">
               {cart.map((p) => (
-                <div className="d-flex" key={p._id}>
-                  <li className="list-group-item w-25">{`${p.name} : ${p.quantity}`}</li>
+                <ul className="d-flex p-0" key={p._id}>
+                  <li className="list-group-item w-50">{`${p.name} (Rs.${p.price} per item) : ${p.quantity}`}</li>
                   <button
-                    className="btn btn-danger w-10"
+                    className="btn btn-outline-danger w-10"
                     onClick={() => removeFromCart(p)}
                   >
                     X
                   </button>
-                </div>
+                </ul>
               ))}
             </ul>
             <button

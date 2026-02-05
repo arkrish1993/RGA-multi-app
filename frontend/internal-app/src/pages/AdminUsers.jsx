@@ -7,19 +7,19 @@ export default function AdminUsers() {
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
-   try{
+    try {
       const res = await api.get("/admin/users");
       setUsers(res.data);
-   
-   } catch(err) {
+    } catch (err) {
       console.log(err.message);
-   } finally {
-       setLoading(false);
-   }
-
+    } finally {
+      setLoading(false);
+    }
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const toggle = async (id) => {
     await api.put(`/admin/users/${id}/toggle-status`);
@@ -29,7 +29,7 @@ export default function AdminUsers() {
   return (
     <>
       <div>
-        <AdminNavbar/>
+        <AdminNavbar />
         <h2 className="text-center">Customer Management</h2>
         {loading && (
           <div className="alert alert-secondary">
@@ -38,9 +38,7 @@ export default function AdminUsers() {
         )}
 
         {!loading && users.length === 0 && (
-          <div className="alert alert-info">
-            No Customers Found
-          </div>
+          <div className="alert alert-primary">No Customers Found</div>
         )}
 
         {!loading && users.length > 0 && (
@@ -58,13 +56,16 @@ export default function AdminUsers() {
                   <td>{u.email}</td>
                   <td>
                     <span
-                    className={`badge ${u.isActive ? "bg-success" : "bg-danger"}`}>
+                      className={`badge ${u.isActive ? "bg-primary" : "bg-danger"}`}
+                    >
                       {u.isActive ? "Active" : "Inactive"}
                     </span>
                   </td>
                   <td>
-                    <button className={`btn btn-sm ${u.isActive ? "btn-warning" : "btn-success"}`}
-                    onClick={() => toggle(u._id)}>
+                    <button
+                      className={`btn btn-sm ${u.isActive ? "btn-primary" : "btn-primary"}`}
+                      onClick={() => toggle(u._id)}
+                    >
                       {u.isActive ? "Deactivate" : "Activate"}
                     </button>
                   </td>
@@ -73,7 +74,6 @@ export default function AdminUsers() {
             </tbody>
           </table>
         )}
-      
       </div>
     </>
   );

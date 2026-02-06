@@ -30,7 +30,7 @@ export default function Orders() {
             <tbody>
               {orders.length === 0 ? (
                 <tr>
-                  <td className="text-center text-muted" colSpan="4">
+                  <td className="text-center text-white" colSpan="4">
                     No Orders Placed.
                   </td>
                 </tr>

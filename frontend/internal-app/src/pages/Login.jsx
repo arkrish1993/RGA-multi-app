@@ -34,7 +34,7 @@ export default function Login() {
               style={{ marginTop: "1%" }}
             />
             <button
-              className="btn btn-outline-primary w-100"
+              className="btn btn-outline-success w-100"
               style={{ marginTop: "1%" }}
             >
               Login

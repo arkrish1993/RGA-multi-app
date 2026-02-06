@@ -38,7 +38,7 @@ export default function AdminUsers() {
         )}
 
         {!loading && users.length === 0 && (
-          <div className="alert alert-primary">No Customers Found</div>
+          <div className="alert alert-info">No Customers Found</div>
         )}
 
         {!loading && users.length > 0 && (
@@ -56,14 +56,14 @@ export default function AdminUsers() {
                   <td>{u.email}</td>
                   <td>
                     <span
-                      className={`badge ${u.isActive ? "bg-primary" : "bg-danger"}`}
+                      className={`badge ${u.isActive ? "bg-success" : "bg-danger"}`}
                     >
                       {u.isActive ? "Active" : "Inactive"}
                     </span>
                   </td>
                   <td>
                     <button
-                      className={`btn btn-sm ${u.isActive ? "btn-primary" : "btn-primary"}`}
+                      className={`btn btn-sm ${u.isActive ? "btn-warning" : "btn-success"}`}
                       onClick={() => toggle(u._id)}
                     >
                       {u.isActive ? "Deactivate" : "Activate"}

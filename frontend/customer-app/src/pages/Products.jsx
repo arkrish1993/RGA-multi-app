@@ -61,7 +61,7 @@ export default function Products() {
       <div className="mx-3">
         <h3 className="text-center my-3">Product Catalog</h3>
         <div style={{ maxHeight: "50vh" }}>
-          <table className="table table-primary table-striped table-hover w-100">
+          <table className="table table-dark table-striped table-hover w-100">
             <thead className="table-dark">
               <tr>
                 <th>Name</th>

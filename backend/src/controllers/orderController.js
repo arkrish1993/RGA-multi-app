@@ -1,4 +1,7 @@
+const { ObjectId } = require("mongodb");
 const Order = require("../models/Order");
+const Product = require("../models/Product");
+
 // const Product = require("../models/Product");
 
 /**
@@ -12,12 +15,16 @@ exports.create = async (req, res) => {
       items: req.body.items,
       totalAmount: req.body.totalAmount,
     });
-    // for (const item in order.items) {
-    //   const { _id, quantity } = item;
-    //   const product = await Product.findById(_id);
-    //   product.stock -= quantity;
-    //   await product.save();
-    // }
+    order.items.forEach(async (item) => {
+      // const product = await Product.find({ _id: new ObjectId(item._id) });
+      const product = await Product.updateOne(
+        { _id: new ObjectId(item._id) },
+        {
+          stock: item.stock - item.quantity,
+        },
+        { new: true, runValidators: true },
+      );
+    });
     res.status(201).json(order);
   } catch (err) {
     res.status(400).json({
